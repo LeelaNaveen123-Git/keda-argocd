@@ -18,4 +18,7 @@ spec:
     min: 0
     max: 10
 
-  scaledownPeriod: 60
+  scalingMetric:
+    requestRate:
+      targetValue: 10
+      window: 1m
