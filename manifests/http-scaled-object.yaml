@@ -1,0 +1,16 @@
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: demo-app
+  namespace: default
+spec:
+  hosts:
+    - demo.local
+  scaleTargetRef:
+    name: demo-app
+    kind: Deployment
+    service: demo-app
+    port: 80
+  replicas:
+    min: 0
+    max: 10
