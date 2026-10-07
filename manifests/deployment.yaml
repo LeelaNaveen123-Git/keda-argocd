@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/component: application
 
 spec:
-  replicas: 1
+  replicas: 3
   strategy:
     type: RollingUpdate
     rollingUpdate:
