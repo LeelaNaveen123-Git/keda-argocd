@@ -3,6 +3,7 @@ kind: Application
 metadata:
   name: keda-demo-app
   namespace: argocd
+
 spec:
   project: default
 
@@ -14,6 +15,13 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: default
+
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: demo-app
+      jsonPointers:
+        - /spec/replicas
 
   syncPolicy:
     automated:
