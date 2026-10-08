@@ -1,0 +1,141 @@
+# ============================================================
+# KEDA HTTP ADD-ON - PRODUCTION CUSTOM VALUES
+# Chart: kedacore/keda-add-ons-http
+# Version: 0.16.0
+# ============================================================
+
+# ------------------------------------------------------------
+# CRDs
+# ------------------------------------------------------------
+crds:
+  install: true
+
+
+# ------------------------------------------------------------
+# HTTP ADD-ON OPERATOR
+# ------------------------------------------------------------
+operator:
+  replicas: 2
+
+  resources:
+    requests:
+      cpu: 250m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+
+  pullPolicy: IfNotPresent
+
+  tolerations: []
+
+  affinity: {}
+
+  topologySpreadConstraints: []
+
+
+# ------------------------------------------------------------
+# HTTP SCALER
+# ------------------------------------------------------------
+scaler:
+  replicas: 2
+
+  resources:
+    requests:
+      cpu: 250m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+
+  pullPolicy: IfNotPresent
+
+  tolerations: []
+
+  affinity: {}
+
+  topologySpreadConstraints: []
+
+
+# ------------------------------------------------------------
+# HTTP INTERCEPTOR
+# ------------------------------------------------------------
+interceptor:
+  replicas:
+    min: 3
+    max: 10
+    waitTimeout: 30s
+
+  resources:
+    requests:
+      cpu: 250m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+
+  pullPolicy: IfNotPresent
+
+  tolerations: []
+
+  affinity: {}
+
+  topologySpreadConstraints: []
+
+
+# ------------------------------------------------------------
+# LOGGING
+# ------------------------------------------------------------
+logging:
+
+  operator:
+    level: info
+    format: console
+    timeEncoding: rfc3339
+    stackTracesEnabled: false
+
+  scaler:
+    level: info
+    format: console
+    timeEncoding: rfc3339
+    stackTracesEnabled: false
+
+  interceptor:
+    level: info
+    format: console
+    timeEncoding: rfc3339
+    stackTracesEnabled: false
+
+
+# ------------------------------------------------------------
+# RBAC
+# ------------------------------------------------------------
+rbac:
+  aggregateToDefaultRoles: false
+
+
+# ------------------------------------------------------------
+# POD SECURITY
+# ------------------------------------------------------------
+podSecurityContext:
+  fsGroup: 1000
+  supplementalGroups:
+    - 1000
+
+
+# ------------------------------------------------------------
+# PROFILING
+# ------------------------------------------------------------
+profiling:
+
+  operator:
+    enabled: false
+    port: 8085
+
+  interceptor:
+    enabled: false
+    port: 8086
+
+  scaler:
+    enabled: false
+    port: 8087

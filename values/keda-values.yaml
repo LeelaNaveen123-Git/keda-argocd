@@ -1,0 +1,49 @@
+# ============================================================
+# KEDA CUSTOM VALUES
+# Chart: kedacore/keda
+# Version: 2.21.0
+# ============================================================
+
+# ------------------------------------------------------------
+# KEDA Operator
+# ------------------------------------------------------------
+operator:
+  replicaCount: 2
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+# ------------------------------------------------------------
+# KEDA Metrics Server
+# ------------------------------------------------------------
+metricsServer:
+  replicaCount: 2
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+# ------------------------------------------------------------
+# Pod Security
+# ------------------------------------------------------------
+podSecurityContext:
+  runAsNonRoot: true
+
+# ------------------------------------------------------------
+# Prometheus Monitoring
+# ------------------------------------------------------------
+prometheus:
+  metricServer:
+    enabled: true
+
+  operator:
+    enabled: true
