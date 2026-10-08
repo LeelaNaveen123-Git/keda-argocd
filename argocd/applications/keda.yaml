@@ -3,18 +3,33 @@ kind: Application
 metadata:
   name: keda
   namespace: argocd
+
 spec:
   project: default
-  source:
-    repoURL: https://kedacore.github.io/charts
-    chart: keda
-    targetRevision: 2.21.0
+
+  sources:
+
+    # KEDA Helm chart
+    - repoURL: https://kedacore.github.io/charts
+      chart: keda
+      targetRevision: 2.21.0
+      helm:
+        valueFiles:
+          - $values/values/keda-values.yaml
+
+    # Git repository containing custom values
+    - repoURL: https://github.com/LeelaNaveen123-Git/keda-argocd.git
+      targetRevision: main
+      ref: values
+
   destination:
     server: https://kubernetes.default.svc
     namespace: keda
+
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+
     syncOptions:
       - CreateNamespace=true
