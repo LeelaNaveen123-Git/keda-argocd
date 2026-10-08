@@ -15,7 +15,7 @@ crds:
 # HTTP ADD-ON OPERATOR
 # ------------------------------------------------------------
 operator:
-  replicas: 2
+  replicas: 1
 
   resources:
     requests:
