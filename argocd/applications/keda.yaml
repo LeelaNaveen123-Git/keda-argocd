@@ -1,5 +1,6 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
+
 metadata:
   name: keda
   namespace: argocd
@@ -9,23 +10,34 @@ spec:
 
   sources:
 
-    # KEDA Helm chart
+    # ==========================================================
+    # KEDA HELM CHART
+    # ==========================================================
     - repoURL: https://kedacore.github.io/charts
       chart: keda
       targetRevision: 2.21.0
+
       helm:
         valueFiles:
           - $values/values/keda-values.yaml
 
-    # Git repository containing custom values
+    # ==========================================================
+    # GIT REPOSITORY - CUSTOM VALUES
+    # ==========================================================
     - repoURL: https://github.com/LeelaNaveen123-Git/keda-argocd.git
       targetRevision: main
       ref: values
 
+  # ============================================================
+  # DESTINATION
+  # ============================================================
   destination:
     server: https://kubernetes.default.svc
     namespace: keda
 
+  # ============================================================
+  # SYNC POLICY
+  # ============================================================
   syncPolicy:
     automated:
       prune: true
@@ -33,3 +45,4 @@ spec:
 
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
