@@ -2,7 +2,7 @@ apiVersion: http.keda.sh/v1alpha1
 kind: HTTPScaledObject
 metadata:
   name: demo-app
-  namespace: default
+  namespace: demo-app-ns
   labels:
     app.kubernetes.io/name: demo-app
     app.kubernetes.io/component: autoscaling

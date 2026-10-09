@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: demo-app
-  namespace: default
+  namespace: demo-app-ns
   labels:
     app: demo-app
     app.kubernetes.io/name: demo-app
